@@ -1,6 +1,7 @@
+
 import { active, projectsArr } from "./project"
 
-let activeProject = null
+export let activeProject = null
 
 const generateUI = () => {
    
@@ -37,6 +38,15 @@ const generateMain = (() => {
 
 }
 
+const projectContent = () => {
+    const projectContentContainer = document.createElement("div")
+    const projectHeader = document.createElement("h2")
+    projectHeader.textContent = activeProject.name
+    projectContentContainer.appendChild(projectHeader)
+
+    return projectContentContainer
+}
+
 export const container = document.querySelector(".container")
 export const headerDiv = document.querySelector(".headerDiv")
 export const sideBarDiv = document.querySelector(".sideBarDiv")
@@ -60,6 +70,9 @@ export const generateProjectCard = (project) => {
         console.log(projectIndex)
        activeProject = projectsArr[`${projectIndex}`]
     console.log("The active project is: " + activeProject.name)
+    const mainContentContainer = document.querySelector(".mainContentContainer")
+    mainContentContainer.textContent = "";
+    mainContentContainer.appendChild(projectContent())
     })
 
 }

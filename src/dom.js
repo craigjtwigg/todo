@@ -1,3 +1,7 @@
+import { active, projectsArr } from "./project"
+
+let activeProject = null
+
 const generateUI = () => {
    
     const container = document.createElement("div")
@@ -37,6 +41,32 @@ export const container = document.querySelector(".container")
 export const headerDiv = document.querySelector(".headerDiv")
 export const sideBarDiv = document.querySelector(".sideBarDiv")
 //export const mainContentContainer = document.querySelector(".mainContentContainer")
+
+export const generateProjectCard = (project) => {
+    const sideBarDiv = document.querySelector(".sideBarDiv")
+        const projectDiv = document.createElement("div")
+        const projectIndex = projectsArr.length - 1
+        projectDiv.classList.add("projectDiv")
+        projectDiv.textContent = project.name
+        sideBarDiv.appendChild(projectDiv)
+        projectsArr.forEach(obj => { 
+        projectDiv.setAttribute("id", projectIndex)
+})
+    
+//const eachProject = document.querySelectorAll(".projectDiv")
+//eachProject.forEach(project => { project.addEventListener("click", () => { console.log(project.id) } ) } )    
+
+    document.getElementById(`${projectIndex}`).addEventListener("click", () => {
+        console.log(projectIndex)
+       activeProject = projectsArr[`${projectIndex}`]
+    console.log("The active project is: " + activeProject.name)
+    })
+
+}
+
+
+
+
 
 
 export const generateProjectForm = () => {

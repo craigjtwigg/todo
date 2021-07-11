@@ -1,6 +1,6 @@
 import './style.css'
 import generateUI, { generateProjectCard, generateProjectForm } from './dom'
-import Project from './project'
+import Project, { activeProject } from './project'
 import Task from './task'
 import { projectsArr } from './project'
 
@@ -23,7 +23,7 @@ const resetForm = () => {
 const projectSubBtn = document.querySelector("#projectSubBtn")
 projectSubBtn.addEventListener("click", () => {
     projectsArr.push(formInput())
-    //generateProjectCard(formInput())
+    generateProjectCard(formInput())
     console.table(projectsArr)
     resetForm();
     

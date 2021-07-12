@@ -38,6 +38,30 @@ const generateMain = (() => {
 
 }
 
+const generateToDoCard = (todo) => {
+    const toDoContainer = document.querySelector(".projectContentContainer")
+    const toDoCard = document.createElement("div")
+    toDoCard.classList.add("toDoCard")
+    toDoContainer.appendChild(toDoCard)
+    const toDoTitleDiv = document.createElement("div")
+    toDoTitleDiv.classList.add("toDoTitleDiv")
+    toDoTitleDiv.textContent = todo.name
+    toDoCard.appendChild(toDoTitleDiv)
+    const toDoDateDiv = document.createElement("div")
+    toDoDateDiv.classList.add("toDoDateDiv")
+    toDoDateDiv.textContent = todo.date
+    toDoCard.appendChild(toDoDateDiv)
+    const toDoPriorityDiv = document.createElement("div")
+    toDoPriorityDiv.classList.add("toDoPriorityDiv")
+    toDoPriorityDiv.textContent = todo.priority
+    toDoCard.appendChild(toDoPriorityDiv)
+    const toDoNotesDiv = document.createElement("div")
+    toDoNotesDiv.classList.add("toDoNotesDiv")
+    toDoNotesDiv.textContent = todo.notes
+    toDoCard.appendChild(toDoNotesDiv)
+}
+    
+
 export const generateToDoForm = () => {
     const toDoFormDiv = document.createElement("div")
     toDoFormDiv.classList.add("toDoFormDiv")
@@ -105,7 +129,7 @@ export const generateToDoForm = () => {
     //const toDoSubBtn = document.querySelector("#toDoSubBtn")
         toDoSubBtn.addEventListener("click", () => {
         activeProject.tasks.push(toDoFormInput())
-        
+        generateToDoCard(toDoFormInput())
         console.table(activeProject.tasks)
         
         
@@ -139,7 +163,8 @@ export const generateProjectCard = (project) => {
         projectsArr.forEach(obj => { 
         projectDiv.setAttribute("id", projectIndex)
 })
-    
+
+
 //const eachProject = document.querySelectorAll(".projectDiv")
 //eachProject.forEach(project => { project.addEventListener("click", () => { console.log(project.id) } ) } )    
 

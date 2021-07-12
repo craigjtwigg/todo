@@ -97,9 +97,9 @@ export const generateToDoForm = () => {
     toDoPriority.appendChild(highPriority)
 
 
-    const toDoNotesInput = document.createElement("input")
+    const toDoNotesInput = document.createElement("textarea")
     toDoNotesInput.setAttribute("id", "toDoNotesInput")
-    toDoNotesInput.setAttribute("type", "text")
+   // toDoNotesInput.setAttribute("type", "text")
     toDoNotesInput.setAttribute("placeholder", "Notes...")
     toDoNotesInput.classList.add("toDoForm")
 
@@ -141,6 +141,7 @@ const projectContent = () => {
     const projectContentContainer = document.createElement("div")
     projectContentContainer.classList.add("projectContentContainer")
     const projectHeader = document.createElement("h2")
+    projectHeader.classList.add("projectHeader")
     projectHeader.textContent = activeProject.name
     projectContentContainer.appendChild(projectHeader)
    

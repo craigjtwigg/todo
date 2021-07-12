@@ -10,21 +10,23 @@ generateUI()
 generateProjectForm()
 
 
-const formInput = () => {
+const projectFormInput = () => {
     const name = document.querySelector("#projectInput").value;
     return new Project(name)
 }
 
-const resetForm = () => {
+const resetProjectForm = () => {
     const name = document.querySelector("#projectInput")
     name.value = ""
 }
 
 const projectSubBtn = document.querySelector("#projectSubBtn")
 projectSubBtn.addEventListener("click", () => {
-    projectsArr.push(formInput())
-    generateProjectCard(formInput())
+    projectsArr.push(projectFormInput())
+    generateProjectCard(projectFormInput())
     console.table(projectsArr)
-    resetForm();
+    resetProjectForm();
     
 })
+
+

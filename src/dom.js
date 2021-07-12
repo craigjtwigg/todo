@@ -1,6 +1,6 @@
 
 import { active, projectsArr } from "./project"
-
+import Task from "./task"
 export let activeProject = null
 
 const generateUI = () => {
@@ -38,11 +38,88 @@ const generateMain = (() => {
 
 }
 
+export const generateToDoForm = () => {
+    const toDoFormDiv = document.createElement("div")
+    toDoFormDiv.classList.add("toDoFormDiv")
+    const toDoNameInput = document.createElement("input")
+    toDoNameInput.setAttribute("id", "toDoNameInput")
+    toDoNameInput.setAttribute("type", "text")
+    toDoNameInput.setAttribute("placeholder", "'To-Do' title...")
+    toDoNameInput.classList.add("toDoForm")
+    
+    toDoNameInput.required = true;
+    
+    const toDoDueDate = document.createElement("input")
+    toDoDueDate.setAttribute("type", "date")
+    toDoDueDate.setAttribute("id", "toDoDueDateInput")
+    toDoDueDate.classList.add("toDoForm")
+
+    const toDoPriority = document.createElement("select")
+    toDoPriority.setAttribute("id", "toDoPriorityInput")
+    toDoPriority.classList.add("toDoForm")
+    const lowPriority = document.createElement("option")
+    lowPriority.setAttribute("value", "low")
+    lowPriority.textContent = "Low Priority"
+    const regularPriority = document.createElement("option")
+    regularPriority.setAttribute("value", "regular")
+    regularPriority.textContent = "Regular Priority"
+    const highPriority = document.createElement("option")
+    highPriority.setAttribute("value", "high")
+    highPriority.textContent = "High Priority"
+
+
+    toDoPriority.appendChild(lowPriority)
+    toDoPriority.appendChild(regularPriority)
+    toDoPriority.appendChild(highPriority)
+
+
+    const toDoNotesInput = document.createElement("input")
+    toDoNotesInput.setAttribute("id", "toDoNotesInput")
+    toDoNotesInput.setAttribute("type", "text")
+    toDoNotesInput.setAttribute("placeholder", "Notes...")
+    toDoNotesInput.classList.add("toDoForm")
+
+    const toDoSubBtn = document.createElement("button")
+    toDoSubBtn.setAttribute("type", "submit")
+    toDoSubBtn.textContent = "+"
+    toDoSubBtn.classList.add("toDoForm")
+    toDoSubBtn.setAttribute("id", "toDoSubBtn")
+
+    toDoFormDiv.appendChild(toDoNameInput)
+    toDoFormDiv.appendChild(toDoDueDate)
+    toDoFormDiv.appendChild(toDoPriority)
+    toDoFormDiv.appendChild(toDoNotesInput)
+    toDoFormDiv.appendChild(toDoSubBtn)
+
+    const toDoContainer = document.querySelector(".projectContentContainer")
+    toDoContainer.appendChild(toDoFormDiv)
+
+    const toDoFormInput = () => {
+        const name = document.querySelector("#toDoNameInput").value;
+        const date = document.querySelector("#toDoDueDateInput").value;
+        const priority = document.querySelector("#toDoPriorityInput").value;
+        const notes = document.querySelector("#toDoNotesInput").value;
+        return new Task(name, date, priority, notes)
+    }
+    
+    //const toDoSubBtn = document.querySelector("#toDoSubBtn")
+        toDoSubBtn.addEventListener("click", () => {
+        activeProject.tasks.push(toDoFormInput())
+        
+        console.table(activeProject.tasks)
+        
+        
+    })
+}
+
 const projectContent = () => {
+    
     const projectContentContainer = document.createElement("div")
+    projectContentContainer.classList.add("projectContentContainer")
     const projectHeader = document.createElement("h2")
     projectHeader.textContent = activeProject.name
     projectContentContainer.appendChild(projectHeader)
+   
 
     return projectContentContainer
 }
@@ -73,6 +150,9 @@ export const generateProjectCard = (project) => {
     const mainContentContainer = document.querySelector(".mainContentContainer")
     mainContentContainer.textContent = "";
     mainContentContainer.appendChild(projectContent())
+    generateToDoForm()
+
+    
     })
 
 }

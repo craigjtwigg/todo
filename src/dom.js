@@ -90,7 +90,7 @@ const generateToDoCard = (todo) => {
         const thisCard = document.getElementById(deleteMe)
         activeProject.tasks.splice(`${deleteMe}`, 1)
         console.table(activeProject.tasks)
-        thisCard.parentNode.removeChild(deleteMe)
+        thisCard.parentNode.removeChild(thisCard)
         
     })
     toDoCard.appendChild(deleteToDo)

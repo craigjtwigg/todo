@@ -1,7 +1,10 @@
 
 import { active, projectsArr } from "./project"
 import Task from "./task"
+
+
 export let activeProject = null
+export let latestToDo = null
 
 const generateUI = () => {
    
@@ -41,6 +44,9 @@ const generateMain = (() => {
 const generateToDoCard = (todo) => {
     const toDoContainer = document.querySelector(".projectContentContainer")
     const toDoCard = document.createElement("div")
+    const cardIndex = activeProject.tasks.length - 1
+    const cardID = "todo" + cardIndex
+    toDoCard.setAttribute("id", cardID)
     toDoCard.classList.add("toDoCard")
     toDoContainer.appendChild(toDoCard)
     const toDoTitleDiv = document.createElement("div")
@@ -59,6 +65,36 @@ const generateToDoCard = (todo) => {
     toDoNotesDiv.classList.add("toDoNotesDiv")
     toDoNotesDiv.textContent = todo.notes
     toDoCard.appendChild(toDoNotesDiv)
+    const doneToDo = document.createElement("button")
+    doneToDo.classList.add("doneToDo")
+    doneToDo.textContent = "DONE?"
+    toDoCard.appendChild(doneToDo)
+    doneToDo.addEventListener("click", () => {
+        const deleteMe = deleteToDo.parentNode.id
+        const thisCard = document.getElementById(deleteMe)
+        activeProject.tasks.splice(`${deleteMe}`, 1)
+        activeProject.done.push(`${deleteMe}`)
+        console.log("to do:")
+        console.table(activeProject.tasks)
+        console.log("done:")
+        console.table(activeProject.done)
+        thisCard.classList.remove("toDoCard")
+        thisCard.classList.add("done")
+        
+    })
+    const deleteToDo = document.createElement("button")
+    deleteToDo.classList.add("deleteToDo")
+    deleteToDo.textContent = "DELETE"
+    deleteToDo.addEventListener("click", () => {
+        const deleteMe = deleteToDo.parentNode.id
+        const thisCard = document.getElementById(deleteMe)
+        activeProject.tasks.splice(`${deleteMe}`, 1)
+        console.table(activeProject.tasks)
+        thisCard.parentNode.removeChild(deleteMe)
+        
+    })
+    toDoCard.appendChild(deleteToDo)
+    
 }
     
 
@@ -129,6 +165,8 @@ export const generateToDoForm = () => {
     //const toDoSubBtn = document.querySelector("#toDoSubBtn")
         toDoSubBtn.addEventListener("click", () => {
         activeProject.tasks.push(toDoFormInput())
+        latestToDo = activeProject.tasks.length - 1
+        console.log("latest " + latestToDo)
         generateToDoCard(toDoFormInput())
         console.table(activeProject.tasks)
         

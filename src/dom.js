@@ -19,7 +19,7 @@ const generateHeader = (() => {
     
     const logo = document.createElement("h1")
     logo.classList.add("logo")
-    logo.textContent = "The Project Planner"
+    logo.textContent = "Project TODOs"
     headerDiv.appendChild(logo)
 })()
 
@@ -141,7 +141,7 @@ export const generateToDoForm = () => {
 
     const toDoSubBtn = document.createElement("button")
     toDoSubBtn.setAttribute("type", "submit")
-    toDoSubBtn.textContent = "+"
+    toDoSubBtn.textContent = "ADD TODO"
     toDoSubBtn.classList.add("toDoForm")
     toDoSubBtn.setAttribute("id", "toDoSubBtn")
 

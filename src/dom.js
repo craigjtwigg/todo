@@ -5,6 +5,8 @@ import Task from "./task"
 
 export let activeProject = null
 export let latestToDo = null
+export let activeToDo = null
+export let activeToDoID = null
 
 const generateUI = () => {
    
@@ -39,6 +41,13 @@ const generateMain = (() => {
     container.appendChild(mainContentContainer)
 })()
 
+const modalBlur = document.createElement("div")
+modalBlur.classList.add("modalBlur")
+document.body.appendChild(modalBlur)
+const modal = document.createElement("div")
+modal.classList.add("modal")
+modalBlur.appendChild(modal)
+
 }
 
 const generateToDoCard = (todo) => {
@@ -56,21 +65,25 @@ const generateToDoCard = (todo) => {
     const toDoDateDiv = document.createElement("div")
     toDoDateDiv.classList.add("toDoDateDiv")
     toDoDateDiv.textContent = todo.date
-    toDoCard.appendChild(toDoDateDiv)
+    //toDoCard.appendChild(toDoDateDiv)
     const toDoPriorityDiv = document.createElement("div")
     toDoPriorityDiv.classList.add("toDoPriorityDiv")
     toDoPriorityDiv.textContent = todo.priority
-    toDoCard.appendChild(toDoPriorityDiv)
+    //toDoCard.appendChild(toDoPriorityDiv)
     const toDoNotesDiv = document.createElement("div")
     toDoNotesDiv.classList.add("toDoNotesDiv")
     toDoNotesDiv.textContent = todo.notes
-    toDoCard.appendChild(toDoNotesDiv)
+    //toDoCard.appendChild(toDoNotesDiv)
+
+    const buttonsDiv = document.createElement("div")
+    toDoCard.appendChild(buttonsDiv)
+
     const doneToDo = document.createElement("button")
     doneToDo.classList.add("doneToDo")
     doneToDo.textContent = "DONE?"
-    toDoCard.appendChild(doneToDo)
+    buttonsDiv.appendChild(doneToDo)
     doneToDo.addEventListener("click", () => {
-        const deleteMe = deleteToDo.parentNode.id
+        const deleteMe = buttonsDiv.parentNode.id
         const thisCard = document.getElementById(deleteMe)
         activeProject.tasks.splice(`${deleteMe}`, 1)
         activeProject.done.push(`${deleteMe}`)
@@ -82,18 +95,32 @@ const generateToDoCard = (todo) => {
         thisCard.classList.add("done")
         
     })
+
+    const editToDo = document.createElement("button")
+    editToDo.classList.add("editToDo")
+    editToDo.textContent = "EDIT . INSPECT"
+    editToDo.addEventListener("click", () => {
+        let editMe = buttonsDiv.parentNode.id.slice(4)
+        editMe = parseInt(editMe)
+        activeToDo =  activeProject.tasks[editMe]
+        generateToDoModal()
+        
+    })
+    buttonsDiv.appendChild(editToDo)
+
+ 
     const deleteToDo = document.createElement("button")
     deleteToDo.classList.add("deleteToDo")
     deleteToDo.textContent = "DELETE"
     deleteToDo.addEventListener("click", () => {
-        const deleteMe = deleteToDo.parentNode.id
+        const deleteMe = buttonsDiv.parentNode.id
         const thisCard = document.getElementById(deleteMe)
         activeProject.tasks.splice(`${deleteMe}`, 1)
         console.table(activeProject.tasks)
         thisCard.parentNode.removeChild(thisCard)
         
     })
-    toDoCard.appendChild(deleteToDo)
+    buttonsDiv.appendChild(deleteToDo)
     
 }
     
@@ -118,13 +145,13 @@ export const generateToDoForm = () => {
     toDoPriority.setAttribute("id", "toDoPriorityInput")
     toDoPriority.classList.add("toDoForm")
     const lowPriority = document.createElement("option")
-    lowPriority.setAttribute("value", "low")
+    lowPriority.setAttribute("value", "Low")
     lowPriority.textContent = "Low Priority"
     const regularPriority = document.createElement("option")
-    regularPriority.setAttribute("value", "regular")
+    regularPriority.setAttribute("value", "Regular")
     regularPriority.textContent = "Regular Priority"
     const highPriority = document.createElement("option")
-    highPriority.setAttribute("value", "high")
+    highPriority.setAttribute("value", "High")
     highPriority.textContent = "High Priority"
 
 
@@ -245,6 +272,44 @@ export const generateProjectForm = () => {
     projectSubBtn.setAttribute("id", "projectSubBtn")
     projectFormDiv.appendChild(projectInput)
     projectFormDiv.appendChild(projectSubBtn)
+}
+
+const generateToDoModal = () => {
+    const modalBlur = document.querySelector(".modalBlur")
+    const modal = document.querySelector(".modal")
+    modalBlur.style.transform = "scale(1)";
+    modal.style.transform = "scale(1)";
+
+    const toDoName = document.createElement("h2")
+    toDoName.classList.add("toDoNameModal")
+    console.log(activeToDo)
+    toDoName.textContent = `${activeToDo.name}`;
+    modal.appendChild(toDoName)
+
+    const toDoDueDate = document.createElement("div")
+    toDoDueDate.classList.add("toDoDueDateModal")
+    toDoDueDate.textContent = `Due Date: ${activeToDo.date}`
+    modal.appendChild(toDoDueDate)
+
+    const toDoPriority = document.createElement("div")
+    toDoPriority.classList.add("toDoPriorityModal")
+    toDoPriority.textContent = `${activeToDo.priority}`
+    modal.appendChild(toDoPriority)
+
+    const toDoNotes = document.createElement("div")
+    toDoNotes.classList.add("toDoNotesModal")
+    toDoNotes.textContent = `${activeToDo.notes}`
+    modal.appendChild(toDoNotes)
+
+    const closeModal = document.createElement("button")
+    closeModal.textContent = "x"
+    closeModal.classList.add("closeModal")
+    modal.appendChild(closeModal)
+    closeModal.addEventListener("click", () => {
+        modalBlur.style.transform = "scale(0)";
+        modal.style.transform = "scale(0)";
+    })
+    
 }
 
 

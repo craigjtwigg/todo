@@ -46,22 +46,38 @@ const generateUI = () => {
   modalBlur.appendChild(modal);
 };
 
+const refreshToDos = () => {
+  const toDoContainer = document.querySelector(".projectContentContainer");
+      toDoContainer.textContent = ""
+      generateToDoForm()
+activeProject.tasks.forEach(task => generateToDoCard(task) )
+}
+
+
+
 const generateToDoCard = (todo) => {
   const toDoContainer = document.querySelector(".projectContentContainer");
   const toDoCard = document.createElement("div");
-  const cardIndex = activeProject.tasks.length - 1;
-  const cardID = "todo" + cardIndex;
-  toDoCard.setAttribute("id", cardID);
+  
   toDoCard.classList.add("toDoCard");
   toDoContainer.appendChild(toDoCard);
+
+  console.log("please be right below")
+  console.log(`${activeProject.tasks.indexOf(todo)}`)
+  let cardIndex = activeProject.tasks.length - 1;
+  const cardID = "todo" + cardIndex++;
+  toDoCard.setAttribute("id", cardID);
+
   const toDoTitleDiv = document.createElement("div");
   toDoTitleDiv.classList.add("toDoTitleDiv");
   toDoTitleDiv.textContent = todo.name;
   toDoCard.appendChild(toDoTitleDiv);
+
   const toDoDateDiv = document.createElement("div");
   toDoDateDiv.classList.add("toDoDateDiv");
   toDoDateDiv.textContent = todo.date;
   //toDoCard.appendChild(toDoDateDiv)
+
   const toDoPriorityDiv = document.createElement("div");
   toDoPriorityDiv.classList.add("toDoPriorityDiv");
   toDoPriorityDiv.textContent = todo.priority;
@@ -130,24 +146,27 @@ const generateToDoCard = (todo) => {
   buttonsDiv.appendChild(deleteToDo);
 };
 
-export const generateToDoForm = () => {
-  const toDoFormDiv = document.createElement("div");
-  toDoFormDiv.classList.add("toDoFormDiv");
+const generateToDoNameInput = (id, parent) => {
   const toDoNameInput = document.createElement("input");
-  toDoNameInput.setAttribute("id", "toDoNameInput");
+  toDoNameInput.setAttribute("id", id);
   toDoNameInput.setAttribute("type", "text");
   toDoNameInput.setAttribute("placeholder", "'To-Do' title...");
   toDoNameInput.classList.add("toDoForm");
-
   toDoNameInput.required = true;
+  parent.appendChild(toDoNameInput)
+}
 
+const generateToDoDateInput = (id, parent) => {
   const toDoDueDate = document.createElement("input");
   toDoDueDate.setAttribute("type", "date");
-  toDoDueDate.setAttribute("id", "toDoDueDateInput");
+  toDoDueDate.setAttribute("id", id);
   toDoDueDate.classList.add("toDoForm");
+  parent.appendChild(toDoDueDate)
+}
 
+const generateToDoPriorityInput = (id, parent) => {
   const toDoPriority = document.createElement("select");
-  toDoPriority.setAttribute("id", "toDoPriorityInput");
+  toDoPriority.setAttribute("id", id);
   toDoPriority.classList.add("toDoForm");
   const lowPriority = document.createElement("option");
   lowPriority.setAttribute("value", "Low");
@@ -163,23 +182,39 @@ export const generateToDoForm = () => {
   toDoPriority.appendChild(regularPriority);
   toDoPriority.appendChild(highPriority);
 
+  parent.appendChild(toDoPriority)
+}
+
+const generateToDoNotesInput = (id, parent) => {
   const toDoNotesInput = document.createElement("textarea");
-  toDoNotesInput.setAttribute("id", "toDoNotesInput");
+  toDoNotesInput.setAttribute("id", id);
   // toDoNotesInput.setAttribute("type", "text")
   toDoNotesInput.setAttribute("placeholder", "Notes...");
   toDoNotesInput.classList.add("toDoForm");
 
-  const toDoSubBtn = document.createElement("button");
-  toDoSubBtn.setAttribute("type", "submit");
-  toDoSubBtn.textContent = "ADD TODO";
-  toDoSubBtn.classList.add("toDoForm");
-  toDoSubBtn.setAttribute("id", "toDoSubBtn");
+  parent.appendChild(toDoNotesInput)
+}
 
-  toDoFormDiv.appendChild(toDoNameInput);
-  toDoFormDiv.appendChild(toDoDueDate);
-  toDoFormDiv.appendChild(toDoPriority);
-  toDoFormDiv.appendChild(toDoNotesInput);
-  toDoFormDiv.appendChild(toDoSubBtn);
+const generateToDoSubmitInput = (id, text, parent) => {
+  const toDoSubBtn = document.createElement("button");
+  toDoSubBtn.setAttribute("id", id);
+  toDoSubBtn.setAttribute("type", "submit");
+  toDoSubBtn.textContent = text;
+  toDoSubBtn.classList.add("toDoForm");
+
+  parent.appendChild(toDoSubBtn)
+}
+
+export const generateToDoForm = () => {
+  const toDoFormDiv = document.createElement("div");
+  toDoFormDiv.classList.add("toDoFormDiv");
+
+  generateToDoNameInput("toDoNameInput", toDoFormDiv)
+  generateToDoDateInput("toDoDueDateInput", toDoFormDiv)
+  generateToDoPriorityInput("toDoPriorityInput", toDoFormDiv)
+  generateToDoNotesInput("toDoNotesInput", toDoFormDiv)
+  generateToDoSubmitInput("toDoSubBtn", "ADD TODO", toDoFormDiv)
+
 
   const toDoContainer = document.querySelector(".projectContentContainer");
   toDoContainer.appendChild(toDoFormDiv);
@@ -193,12 +228,12 @@ export const generateToDoForm = () => {
     return new Task(name, date, priority, notes, status);
   };
 
-  //const toDoSubBtn = document.querySelector("#toDoSubBtn")
+  const toDoSubBtn = document.querySelector("#toDoSubBtn")
   toDoSubBtn.addEventListener("click", () => {
     activeProject.tasks.push(toDoFormInput());
     latestToDo = activeProject.tasks.length - 1;
     console.log("latest " + latestToDo);
-    generateToDoCard(toDoFormInput());
+    refreshToDos()
     console.table(activeProject.tasks);
   });
 };
@@ -267,6 +302,21 @@ export const generateProjectForm = () => {
   projectFormDiv.appendChild(projectSubBtn);
 };
 
+
+const genererateCloseButton = () => {
+  const modal = document.querySelector(".modal");
+  const modalBlur = document.querySelector(".modalBlur");
+  const closeModal = document.createElement("button");
+  closeModal.textContent = "x";
+  closeModal.classList.add("closeModal");
+  modal.appendChild(closeModal);
+  closeModal.addEventListener("click", () => {
+    modalBlur.style.transform = "scale(0)";
+    modal.style.transform = "scale(0)";
+    modal.textContent = ""
+    })
+};
+
 const generateToDoModal = () => {
   const modalBlur = document.querySelector(".modalBlur");
   const modal = document.querySelector(".modal");
@@ -294,20 +344,43 @@ const generateToDoModal = () => {
   toDoNotes.innerHTML = `<span class ="modalLabels">Notes: </span>${activeToDo.notes}`;
   modal.appendChild(toDoNotes);
 
-  const closeModal = document.createElement("button");
-  closeModal.textContent = "x";
-  closeModal.classList.add("closeModal");
-  modal.appendChild(closeModal);
-  closeModal.addEventListener("click", () => {
-    modalBlur.style.transform = "scale(0)";
-    modal.style.transform = "scale(0)";
-    modal.textContent = ""
-  });
+  genererateCloseButton()
 
   const editToDo = document.createElement("button")
   editToDo.classList.add("editToDo")
   editToDo.textContent = "EDIT"
   modal.appendChild(editToDo)
+  editToDo.addEventListener("click", () => {
+    console.log("hello")
+    modal.textContent = ""
+    generateToDoNameInput("editNameInput", modal)
+    generateToDoDateInput("editDateInput", modal)
+    generateToDoPriorityInput("editPriorityInput", modal)
+    generateToDoNotesInput("editNotesInput", modal)
+    generateToDoSubmitInput("editSubmitButton", "SUBMIT CHANGES", modal)
+    genererateCloseButton()
+    const editName = document.getElementById("editNameInput")
+    editName.value = activeToDo.name
+    const editDate = document.getElementById("editDateInput")
+    editDate.value = activeToDo.date
+    const editPriority = document.getElementById("editPriorityInput")
+    editPriority.value = activeToDo.priority
+    const editNotes = document.getElementById("editNotesInput")
+    editNotes.value = activeToDo.notes
+    document.getElementById("editSubmitButton").addEventListener("click", () => {
+      activeToDo.name = editName.value
+      activeToDo.date = editDate.value
+      activeToDo.priority = editPriority.value
+      activeToDo.notes = editNotes.value
+      modal.textContent = ""
+      modalBlur.style.transform = "scale(0)";
+      modal.style.transform = "scale(0)";
+      
+      refreshToDos()
+
+    })
+  })
+  
 };
 
 export default generateUI;

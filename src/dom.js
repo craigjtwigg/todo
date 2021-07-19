@@ -30,6 +30,18 @@ const generateUI = () => {
     projectsHeader.classList.add("projectsHeader");
     sideBarDiv.appendChild(projectsHeader);
     projectsHeader.textContent = "PROJECTS";
+    const projects = document.createElement("div")
+    projects.classList.add("projectsDiv")
+    sideBarDiv.appendChild(projects)
+    const addProjectButton = document.createElement("button")
+    addProjectButton.textContent = "ADD PROJECT"
+    addProjectButton.classList.add("addProjectButton")
+    sideBarDiv.appendChild(addProjectButton)
+    addProjectButton.style.transform = "scale(0)"
+    addProjectButton.addEventListener("click", () => {
+      generateProjectForm()
+    })
+
   })();
 
   const generateMain = (() => {
@@ -64,12 +76,13 @@ const generateToDoCard = (todo) => {
 
   console.log("please be right below")
   console.log(`${activeProject.tasks.indexOf(todo)}`)
-  let cardIndex = activeProject.tasks.length - 1;
-  const cardID = "todo" + cardIndex++;
+  let cardIndex = activeProject.tasks.indexOf(todo);
+  const cardID = "todo" + cardIndex;
   toDoCard.setAttribute("id", cardID);
 
   const toDoTitleDiv = document.createElement("div");
-  toDoTitleDiv.classList.add("toDoTitleDiv");
+  const titleClass = "titleDiv" + cardIndex
+  toDoTitleDiv.classList.add(titleClass);
   toDoTitleDiv.textContent = todo.name;
   toDoCard.appendChild(toDoTitleDiv);
 
@@ -88,6 +101,7 @@ const generateToDoCard = (todo) => {
   //toDoCard.appendChild(toDoNotesDiv)
 
   const buttonsDiv = document.createElement("div");
+  buttonsDiv.classList.add("buttonsDiv")
   toDoCard.appendChild(buttonsDiv);
 
   
@@ -126,6 +140,7 @@ const generateToDoCard = (todo) => {
   editToDo.classList.add("editToDo");
   editToDo.textContent = "DETAILS";
   editToDo.addEventListener("click", () => {
+    activeToDoID = buttonsDiv.parentNode.id
     let editMe = buttonsDiv.parentNode.id.slice(4);
     editMe = parseInt(editMe);
     activeToDo = activeProject.tasks[editMe];
@@ -137,11 +152,14 @@ const generateToDoCard = (todo) => {
   deleteToDo.classList.add("deleteToDo");
   deleteToDo.textContent = "DELETE";
   deleteToDo.addEventListener("click", () => {
-    const deleteMe = buttonsDiv.parentNode.id;
-    const thisCard = document.getElementById(deleteMe);
-    activeProject.tasks.splice(`${deleteMe}`, 1);
+    const deleteMe = buttonsDiv.parentNode.id.slice(4);
+    //const thisCard = document.getElementById(deleteMe)
+    activeToDo = deleteMe
+    const indexOfActive = activeProject.tasks.indexOf(activeToDo)
+    activeProject.tasks.splice(indexOfActive, 1);
     console.table(activeProject.tasks);
-    thisCard.parentNode.removeChild(thisCard);
+    //thisCard.parentNode.removeChild(thisCard)
+    refreshToDos()
   });
   buttonsDiv.appendChild(deleteToDo);
 };
@@ -232,8 +250,10 @@ export const generateToDoForm = () => {
   toDoSubBtn.addEventListener("click", () => {
     activeProject.tasks.push(toDoFormInput());
     latestToDo = activeProject.tasks.length - 1;
+    activeToDo = latestToDo
     console.log("latest " + latestToDo);
     refreshToDos()
+    activeToDo = null
     console.table(activeProject.tasks);
   });
 };
@@ -252,15 +272,17 @@ const projectContent = () => {
 export const container = document.querySelector(".container");
 export const headerDiv = document.querySelector(".headerDiv");
 export const sideBarDiv = document.querySelector(".sideBarDiv");
+const projects = document.querySelector(".projectsDiv")
 //export const mainContentContainer = document.querySelector(".mainContentContainer")
 
 export const generateProjectCard = (project) => {
+  const projects = document.querySelector(".projectsDiv")
   const sideBarDiv = document.querySelector(".sideBarDiv");
   const projectDiv = document.createElement("div");
   const projectIndex = projectsArr.length - 1;
   projectDiv.classList.add("projectDiv");
   projectDiv.textContent = project.name;
-  sideBarDiv.appendChild(projectDiv);
+  projects.appendChild(projectDiv);
   projectsArr.forEach((obj) => {
     projectDiv.setAttribute("id", projectIndex);
   });
@@ -278,11 +300,13 @@ export const generateProjectCard = (project) => {
     mainContentContainer.textContent = "";
     mainContentContainer.appendChild(projectContent());
     generateToDoForm();
+    refreshToDos()
   });
 };
 
 export const generateProjectForm = () => {
   const mainContentContainer = document.querySelector(".mainContentContainer");
+  mainContentContainer.textContent = ""
   const projectFormDiv = document.createElement("div");
   projectFormDiv.classList.add("projectFormDiv");
   mainContentContainer.appendChild(projectFormDiv);
@@ -375,8 +399,14 @@ const generateToDoModal = () => {
       modal.textContent = ""
       modalBlur.style.transform = "scale(0)";
       modal.style.transform = "scale(0)";
+
+      let cardIndex = activeProject.tasks.indexOf(activeToDo);
+      const titleClass = ".titleDiv" + cardIndex
       
-      refreshToDos()
+
+      const titleDiv = document.querySelector(titleClass)
+  
+      titleDiv.textContent = editName.value
 
     })
   })

@@ -26,7 +26,8 @@ projectSubBtn.addEventListener("click", () => {
     generateProjectCard(projectFormInput())
     console.table(projectsArr)
     resetProjectForm();
-    
+    const addProjectButton = document.querySelector(".addProjectButton")
+    addProjectButton.style.transform = "scale(1)"
 })
 
 

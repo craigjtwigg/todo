@@ -154,8 +154,9 @@ const generateToDoCard = (todo) => {
   deleteToDo.addEventListener("click", () => {
     const deleteMe = buttonsDiv.parentNode.id.slice(4);
     //const thisCard = document.getElementById(deleteMe)
-    activeToDo = deleteMe
+    activeToDo = activeProject.tasks[deleteMe]
     const indexOfActive = activeProject.tasks.indexOf(activeToDo)
+    console.log("delete this: " + indexOfActive)
     activeProject.tasks.splice(indexOfActive, 1);
     console.table(activeProject.tasks);
     //thisCard.parentNode.removeChild(thisCard)

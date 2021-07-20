@@ -364,3 +364,21 @@ h1 {
 .modalLabels {
     font-weight: 900;
 }
+
+.addProjectButton {
+        grid-area: button;
+        width: 90%;
+        display: block;
+        background: rgb(65,33,203);
+        color: blanchedalmond;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border: none;
+        border-radius: 0.7rem;
+        box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+}
+
+.addProjectButton:hover {
+    cursor: pointer;
+    background: rgb(23, 36, 218);
+}

@@ -1,4 +1,4 @@
-import { active, projectsArr } from "./project";
+import Project, { active, projectsArr } from "./project";
 import Task from "./task";
 
 export let activeProject = null;
@@ -325,6 +325,32 @@ export const generateProjectForm = () => {
   projectSubBtn.setAttribute("id", "projectSubBtn");
   projectFormDiv.appendChild(projectInput);
   projectFormDiv.appendChild(projectSubBtn);
+
+
+  const projectFormInput = () => {
+    const name = document.querySelector("#projectInput").value;
+    return new Project(name)
+}
+
+const resetProjectForm = () => {
+    const name = document.querySelector("#projectInput")
+    name.value = ""
+}
+
+
+projectSubBtn.addEventListener("click", () => {
+    projectsArr.push(projectFormInput())
+    generateProjectCard(projectFormInput())
+    console.table(projectsArr)
+    resetProjectForm();
+    const addProjectButton = document.querySelector(".addProjectButton")
+    addProjectButton.style.transform = "scale(1)"
+})
+
+
+
+
+
 };
 
 

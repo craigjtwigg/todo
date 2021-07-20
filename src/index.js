@@ -9,25 +9,3 @@ import { projectsArr } from './project'
 generateUI()
 generateProjectForm()
 
-
-const projectFormInput = () => {
-    const name = document.querySelector("#projectInput").value;
-    return new Project(name)
-}
-
-const resetProjectForm = () => {
-    const name = document.querySelector("#projectInput")
-    name.value = ""
-}
-
-const projectSubBtn = document.querySelector("#projectSubBtn")
-projectSubBtn.addEventListener("click", () => {
-    projectsArr.push(projectFormInput())
-    generateProjectCard(projectFormInput())
-    console.table(projectsArr)
-    resetProjectForm();
-    const addProjectButton = document.querySelector(".addProjectButton")
-    addProjectButton.style.transform = "scale(1)"
-})
-
-

@@ -1,4 +1,4 @@
-export const projectsArr = []
+//export let projectsArr = []
 
 class Project {
     constructor(name){

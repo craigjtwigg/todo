@@ -1,4 +1,4 @@
-import Project, { active, projectsArr } from "./project";
+import Project, { active } from "./project";
 import Task from "./task";
 
 export let activeProject = null;
@@ -7,6 +7,7 @@ export let activeToDo = null;
 export let activeToDoID = null;
 
 const generateUI = () => {
+  loadFromStorage()
   const container = document.createElement("div");
   container.classList.add("container");
   document.body.appendChild(container);
@@ -38,8 +39,10 @@ const generateUI = () => {
     addProjectButton.classList.add("addProjectButton")
     sideBarDiv.appendChild(addProjectButton)
     addProjectButton.style.transform = "scale(0)"
+    refreshProjects()
     addProjectButton.addEventListener("click", () => {
       generateProjectForm()
+      
     })
 
   })();
@@ -63,6 +66,14 @@ const refreshToDos = () => {
       toDoContainer.textContent = ""
       generateToDoForm()
 activeProject.tasks.forEach(task => generateToDoCard(task) )
+}
+
+const refreshProjects = () => {
+  const projectsDiv = document.querySelector(".projectsDiv")
+  projectsDiv.textContent = ""
+  console.log("please load this:")
+  console.table(projectsArr)
+  projectsArr.forEach(project => generateProjectCard(project))
 }
 
 
@@ -161,6 +172,7 @@ const generateToDoCard = (todo) => {
     console.table(activeProject.tasks);
     //thisCard.parentNode.removeChild(thisCard)
     refreshToDos()
+    saveToStorage()
   });
   buttonsDiv.appendChild(deleteToDo);
 };
@@ -256,6 +268,7 @@ export const generateToDoForm = () => {
     refreshToDos()
     activeToDo = null
     console.table(activeProject.tasks);
+    saveToStorage()
   });
 };
 
@@ -345,6 +358,7 @@ projectSubBtn.addEventListener("click", () => {
     resetProjectForm();
     const addProjectButton = document.querySelector(".addProjectButton")
     addProjectButton.style.transform = "scale(1)"
+    saveToStorage()
 })
 
 
@@ -435,9 +449,32 @@ const generateToDoModal = () => {
   
       titleDiv.textContent = editName.value
 
+      saveToStorage()
+
     })
   })
   
 };
+
+//LOCAL STORAGE
+
+let projectsArr = []
+
+function saveToStorage(){
+  localStorage.setItem('projectsArr', JSON.stringify(projectsArr));
+
+}
+
+function loadFromStorage(){
+  projectsArr = JSON.parse(localStorage.getItem('projectsArr'));
+   if(projectsArr === null) projectsArr = [];
+   console.table(projectsArr)
+}
+
+function clearStorage(){
+   localStorage.clear();
+   projectsArr = [];
+   resetDisplay();
+}
 
 export default generateUI;

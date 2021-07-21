@@ -1,384 +1,388 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 
-
-
 * {
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 16px;
-    margin: 0;
-    background-color: rgb(212, 209, 209);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  background-color: rgb(212, 209, 209);
 }
 
 .container {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 25% 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "header header header"
-                         "sidebar main main";
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 25% 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    'header header header'
+    'sidebar main main';
 }
 
 .headerDiv {
-    grid-area: header;
-    display: flex;
-    background: rgb(98, 66, 241);
-    background: linear-gradient(70deg, rgba(65,33,203,1) 8%, rgba(61,32,200,1) 27%, rgba(5,15,156,1) 48%, rgb(141, 71, 233) 100%);
-    color: white;
-    width: 100%;
-    height: 5rem;
-    padding: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 0 0 6rem;
+  grid-area: header;
+  display: flex;
+  background: rgb(98, 66, 241);
+  background: linear-gradient(
+    70deg,
+    rgba(65, 33, 203, 1) 8%,
+    rgba(61, 32, 200, 1) 27%,
+    rgba(5, 15, 156, 1) 48%,
+    rgb(141, 71, 233) 100%
+  );
+  color: white;
+  width: 100%;
+  height: 5rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0 0 6rem;
 }
 
 h1 {
-    color: white;
-    font-family: 'Josefin Sans', sans-serif;
-    text-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  text-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 .projectHeader {
-    display: block;
-    text-align: center;
-    padding: 1rem 0;
+  display: block;
+  text-align: center;
+  padding: 1rem 0;
 }
 
 .sideBarDiv {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    grid-area: sidebar;
-    margin: 0 1rem;
-    border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 0.281);
-    box-shadow: rgba(0, 0, 0, 0.432) 0.5rem 0.5rem 0.5rem;
-    height: 500px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  grid-area: sidebar;
+  margin: 0 1rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.281);
+  box-shadow: rgba(0, 0, 0, 0.432) 0.5rem 0.5rem 0.5rem;
+  height: 500px;
+  width: 100%;
 }
 
 .projectsHeader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 1.3rem;
 }
 
 .projectDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(161, 160, 160, 0.137);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.1rem 0.1rem 0.1rem;
-    width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(161, 160, 160, 0.137);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.1rem 0.1rem 0.1rem;
+  width: 90%;
 }
 
 .projectDiv:hover {
-    cursor: pointer;
-    background-color: rgba(102, 101, 101, 0.137);
+  cursor: pointer;
+  background-color: rgba(102, 101, 101, 0.137);
 }
 
 .mainContentContainer {
-    grid-area: main;
-    margin: 0 1rem;
-    border-radius: 5%;
-    background-color: rgba(255, 255, 255, 0.281);
-    box-shadow: rgba(0, 0, 0, 0.432) 0.5rem 0.5rem 0.5rem;
-    height: 500px;
-    width: 92%;
+  grid-area: main;
+  margin: 0 1rem;
+  border-radius: 5%;
+  background-color: rgba(255, 255, 255, 0.281);
+  box-shadow: rgba(0, 0, 0, 0.432) 0.5rem 0.5rem 0.5rem;
+  height: 500px;
+  width: 92%;
 }
 
 .projectFormDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    height: 100%;
-    padding-top: 2rem;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  padding-top: 2rem;
+  align-items: center;
 }
 
 #projectInput {
-    display: block;
-    width: 60%;
-    border-radius: 0.5rem;
-    height: 3rem;
-    text-align: center;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  display: block;
+  width: 60%;
+  border-radius: 0.5rem;
+  height: 3rem;
+  text-align: center;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 #projectInput:focus {
-    border: rgb(23, 36, 218) solid 1px;
+  border: rgb(23, 36, 218) solid 1px;
 }
 
 #projectSubBtn {
-    display: block;
-    background-color: rgb(5, 15, 156);
-    color: rgb(255, 255, 255);
-    padding: 1rem;
-    border: none;
-    border-radius: 0.7rem;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  display: block;
+  background-color: rgb(5, 15, 156);
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  border: none;
+  border-radius: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
-#projectSubBtn:hover, #toDoSubBtn:hover {
-    cursor: pointer;
-    background-color: rgb(23, 36, 218);
-   
+#projectSubBtn:hover,
+#toDoSubBtn:hover {
+  cursor: pointer;
+  background-color: rgb(23, 36, 218);
 }
 
 .projectContentContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 1rem;
 }
 
 .toDoFormDiv {
-    width: 100%;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr fr 1fr;
-    grid-template-areas: "title title"
-                         "date priority"
-                         "notes notes"
-                         "button button"   ;
-    justify-items: center;         
-    padding: 1.5rem;            
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr fr 1fr;
+  grid-template-areas:
+    'title title'
+    'date priority'
+    'notes notes'
+    'button button';
+  justify-items: center;
+  padding: 1.5rem;
 }
 
 #toDoNameInput {
-    grid-area: title;
-    display: block;
-    width: 90%;
-    border-radius: 0.5rem;
-    height: 2.2rem;
-    text-align: center;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  grid-area: title;
+  display: block;
+  width: 90%;
+  border-radius: 0.5rem;
+  height: 2.2rem;
+  text-align: center;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 #toDoDueDateInput {
-    grid-area: date;
-    display: block;
-    width: 80%;
-    border-radius: 0.5rem;
-    height: 2rem;
-    text-align: right;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  grid-area: date;
+  display: block;
+  width: 80%;
+  border-radius: 0.5rem;
+  height: 2rem;
+  text-align: right;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 #toDoPriorityInput {
-    grid-area: priority;
-    display: block;
-    width: 80%;
-    border-radius: 0.5rem;
-    height: 2rem;
-    text-align: left;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  grid-area: priority;
+  display: block;
+  width: 80%;
+  border-radius: 0.5rem;
+  height: 2rem;
+  text-align: left;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 #toDoNotesInput {
-    grid-area: notes;
-    resize: none;
-    display: block;
-    width: 90%;
-    min-height: 80px;
-    box-sizing: border-box;
-    font-size: 16px;
-    border-radius: 0.5rem;
-    height: 1.5rem;
-    text-align: center;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  grid-area: notes;
+  resize: none;
+  display: block;
+  width: 90%;
+  min-height: 80px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border-radius: 0.5rem;
+  height: 1.5rem;
+  text-align: center;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 #toDoSubBtn {
-    grid-area: button;
-    width: 90%;
-    display: block;
-    background: rgb(65,33,203);
-    color: blanchedalmond;
-    padding: 1rem;
-    border: none;
-    border-radius: 0.7rem;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  grid-area: button;
+  width: 90%;
+  display: block;
+  background: rgb(65, 33, 203);
+  color: blanchedalmond;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 .toDoCard {
-    display: flex;
-    justify-content: space-between;
-    justify-self: center;
-    align-items: center;
-    align-self: center;
-    padding: 1rem;
-    margin: 0.5rem;
-    background-color: rgba(161, 160, 160, 0.137);
-    border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.1rem 0.1rem 0.1rem;
-    width: 90%;
-    height: 3.3rem;
+  display: flex;
+  justify-content: space-between;
+  justify-self: center;
+  align-items: center;
+  align-self: center;
+  padding: 1rem;
+  margin: 0.5rem;
+  background-color: rgba(161, 160, 160, 0.137);
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.1rem 0.1rem 0.1rem;
+  width: 90%;
+  height: 3.3rem;
 }
 
 .toDoTitleDiv {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .done {
-    display: flex;
-    justify-content: space-between;
-    align-self: center;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    background-color: rgb(128, 128, 128);
-    color: rgb(59, 59, 59);
-    border: rgb(117, 117, 117);
-    border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.1rem 0.1rem 0.1rem;
-    width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  background-color: rgb(128, 128, 128);
+  color: rgb(59, 59, 59);
+  border: rgb(117, 117, 117);
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.1rem 0.1rem 0.1rem;
+  width: 90%;
 }
 
 .strike {
-    background-color: black;
-    width: 95%;
-    min-height: 3px;
-    z-index: 2;
-    position: relative;
-    bottom: 1.2rem;
+  background-color: black;
+  width: 95%;
+  min-height: 3px;
+  z-index: 2;
+  position: relative;
+  bottom: 1.2rem;
 }
 
 .deleteToDo {
-    background-color: rgb(190, 0, 0);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem;
+  background-color: rgb(190, 0, 0);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem;
 }
 
 .deleteToDo:hover {
-    cursor: pointer;
-    background-color: rgb(224, 15, 15);
+  cursor: pointer;
+  background-color: rgb(224, 15, 15);
 }
 
 .doneToDo {
-   
-    background-color: rgb(9, 155, 28);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem;
+  background-color: rgb(9, 155, 28);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem;
 }
 
 .doneToDo:hover {
-    cursor: pointer;
-    background-color: rgb(15, 192, 38);
+  cursor: pointer;
+  background-color: rgb(15, 192, 38);
 }
 
 .undoToDo {
-    
-    margin: 0 1rem;
-    cursor: pointer;
-    background-color: rgb(226, 132, 10);
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem;
+  margin: 0 1rem;
+  cursor: pointer;
+  background-color: rgb(226, 132, 10);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem;
 }
 
 .undoToDo:hover {
-    cursor: pointer;
-    background-color: rgb(248, 153, 28);
+  cursor: pointer;
+  background-color: rgb(248, 153, 28);
 }
 
 .editToDo {
-    margin: 0 1rem;
-    cursor: pointer;
-    background-color: rgb(226, 194, 10);
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem;
+  margin: 0 1rem;
+  cursor: pointer;
+  background-color: rgb(226, 194, 10);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem;
 }
 
 .editToDo:hover {
-    background-color: rgb(250, 217, 28);
+  background-color: rgb(250, 217, 28);
 }
 
 .buttonsDiv {
-    display: flex;
+  display: flex;
 }
 
 .modalBlur {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.719);
-    width: 100%;
-    height: 100vh;
-    z-index: 100;
-    transform: scale(0);
-    position: absolute;
-    top: 0;
-    left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.719);
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  transform: scale(0);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .modal {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-    transform: scale(0);
-    width: 60%;
-    height: 60%;
-    background-color: rgb(218, 218, 218);
-    border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.432) 0.3rem 0.3rem 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  transform: scale(0);
+  width: 60%;
+  height: 60%;
+  background-color: rgb(218, 218, 218);
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.3rem 0.3rem 0.3rem;
 }
 
 .closeModal {
-    cursor: pointer;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    height: 30px;
-    width: 30px;
-    border: none;
-    border-radius: 15px;
+  cursor: pointer;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 15px;
 }
 
 .modalLabels {
-    font-weight: 900;
+  font-weight: 900;
 }
 
 .addProjectButton {
-        grid-area: button;
-        width: 90%;
-        display: block;
-        background: rgb(65,33,203);
-        color: blanchedalmond;
-        margin-top: 1.5rem;
-        padding: 1rem;
-        border: none;
-        border-radius: 0.7rem;
-        box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
+  grid-area: button;
+  width: 90%;
+  display: block;
+  background: rgb(65, 33, 203);
+  color: blanchedalmond;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.432) 0.2rem 0.2rem 0.2rem;
 }
 
 .addProjectButton:hover {
-    cursor: pointer;
-    background: rgb(23, 36, 218);
+  cursor: pointer;
+  background: rgb(23, 36, 218);
 }

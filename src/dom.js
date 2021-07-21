@@ -85,6 +85,8 @@ const generateToDoCard = (todo) => {
   toDoCard.classList.add("toDoCard");
   toDoContainer.appendChild(toDoCard);
 
+  //todo.status === "complete" ? markAsDone() : null;
+
   console.log("please be right below")
   console.log(`${activeProject.tasks.indexOf(todo)}`)
   let cardIndex = activeProject.tasks.indexOf(todo);
@@ -123,18 +125,27 @@ const generateToDoCard = (todo) => {
   doneToDo.textContent = "DONE?";
   buttonsDiv.appendChild(doneToDo);
   doneToDo.addEventListener("click", () => {
-    const toDoID = buttonsDiv.parentNode.id;
-    const thisCard = document.getElementById(toDoID);
+  
     let toDoIndex = buttonsDiv.parentNode.id.slice(4);
     toDoIndex = parseInt(toDoIndex);
     activeToDo = activeProject.tasks[toDoIndex];
-    //activeProject.tasks.splice(`${deleteMe}`, 1);
-    //activeProject.done.push(`${deleteMe}`);
     activeToDo.status = "complete"
     //activeProject.tasks.splice(`${deleteMe}`, 1);
     //activeProject.done.push(`${deleteMe}`);
-    activeToDo.status = "complete"
-    console.log("to do:");
+    
+    //activeProject.tasks.splice(`${deleteMe}`, 1);
+    //activeProject.done.push(`${deleteMe}`);
+    //activeToDo.status = "complete"
+    markAsDone()
+    refreshToDos()
+  })
+})()
+
+const markAsDone = () => {
+  const doneToDo = document.createElement("button");
+  const toDoID = buttonsDiv.parentNode.id;
+  const thisCard = document.getElementById(toDoID);
+  console.log("to do:");
     console.table(activeProject.tasks);
     console.log("done:");
     console.table(activeProject.done);
@@ -144,8 +155,7 @@ const generateToDoCard = (todo) => {
     strike.classList.add("strike")
     toDoTitleDiv.appendChild(strike)
     doneToDo.style.transform = "scale(0)"
-  })
-})()
+}
 
   const editToDo = document.createElement("button");
   editToDo.classList.add("editToDo");
@@ -293,7 +303,7 @@ export const generateProjectCard = (project) => {
   const projects = document.querySelector(".projectsDiv")
   const sideBarDiv = document.querySelector(".sideBarDiv");
   const projectDiv = document.createElement("div");
-  const projectIndex = projectsArr.length - 1;
+  const projectIndex = projectsArr.indexOf(project);
   projectDiv.classList.add("projectDiv");
   projectDiv.textContent = project.name;
   projects.appendChild(projectDiv);

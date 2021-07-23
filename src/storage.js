@@ -1,4 +1,4 @@
-import { projectsArr, setProjectsArr } from ".";
+import { projectsArr, setProjectsArr } from '.';
 
 //LOCAL STORAGE
 
@@ -7,9 +7,8 @@ function saveToStorage() {
 }
 
 function loadFromStorage() {
-  
   const loadProjects = JSON.parse(localStorage.getItem('projectsArr'));
-  setProjectsArr(loadProjects) 
+  setProjectsArr(loadProjects);
   if (projectsArr === null) projectsArr = [];
   console.table(projectsArr);
 }

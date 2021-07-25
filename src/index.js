@@ -3,7 +3,7 @@ import Project from './project';
 import Task from './task';
 import { saveToStorage, loadFromStorage, clearStorage } from './storage'
 
-let activeProject = null;
+export let activeProject = null;
 let latestToDo = null;
 let activeToDo = null;
 //let activeToDoID = null;
@@ -11,10 +11,14 @@ let activeToDo = null;
 export let projectsArr = [];
 
 export const setProjectsArr = (value) => {
-    projectsArr = value
+  projectsArr = value
 }
 
-loadFromStorage();
+export const setActiveProject = (project) => {
+  activeProject = project
+}
+
+//loadFromStorage();
 
 
 
@@ -27,13 +31,7 @@ const refreshToDos = () => {
   activeProject.tasks.forEach((task) => generateToDoCard(task));
 };
 
-const refreshProjects = () => {
-  const projectsDiv = document.querySelector('.projectsDiv');
-  projectsDiv.textContent = '';
-  console.log('please load this:');
-  console.table(projectsArr);
-  projectsArr.forEach((project) => generateProjectCard(project));
-};
+
 
 const generateToDoCard = (todo) => {
   const toDoContainer = document.querySelector('.projectContentContainer');
@@ -232,76 +230,7 @@ const projectContent = () => {
   return projectContentContainer;
 };
 
-export const container = document.querySelector('.container');
-export const headerDiv = document.querySelector('.headerDiv');
-export const sideBarDiv = document.querySelector('.sideBarDiv');
 
-export const generateProjectCard = (project) => {
-  const projects = document.querySelector('.projectsDiv');
-  const projectDiv = document.createElement('div');
-  const projectIndex = projectsArr.indexOf(project);
-  projectDiv.classList.add('projectDiv');
-  projectDiv.textContent = project.name;
-  projects.appendChild(projectDiv);
-  projectsArr.forEach((obj) => {
-    projectDiv.setAttribute('id', projectIndex);
-  });
-
-  document.getElementById(`${projectIndex}`).addEventListener('click', () => {
-    console.log(projectIndex);
-    activeProject = projectsArr[`${projectIndex}`];
-    console.log('The active project is: ' + activeProject.name);
-    const mainContentContainer = document.querySelector(
-      '.mainContentContainer'
-    );
-    mainContentContainer.textContent = '';
-    mainContentContainer.appendChild(projectContent());
-    generateToDoForm();
-    refreshToDos();
-  });
-};
-
-export const generateProjectForm = () => {
-  const mainContentContainer = document.querySelector('.mainContentContainer');
-  mainContentContainer.textContent = '';
-  const projectFormDiv = document.createElement('div');
-  projectFormDiv.classList.add('projectFormDiv');
-  mainContentContainer.appendChild(projectFormDiv);
-  const projectInput = document.createElement('input');
-  projectInput.setAttribute('id', 'projectInput');
-  projectInput.setAttribute('type', 'text');
-  projectInput.setAttribute('placeholder', 'What is the name of your project?');
-  projectInput.classList.add('projectForm');
-  projectInput.querySelector('.projectInput');
-  projectInput.required = true;
-  const projectSubBtn = document.createElement('button');
-  projectSubBtn.setAttribute('type', 'submit');
-  projectSubBtn.textContent = 'CREATE PROJECT';
-  projectSubBtn.classList.add('projectForm');
-  projectSubBtn.setAttribute('id', 'projectSubBtn');
-  projectFormDiv.appendChild(projectInput);
-  projectFormDiv.appendChild(projectSubBtn);
-
-  const projectFormInput = () => {
-    const name = document.querySelector('#projectInput').value;
-    return new Project(name);
-  };
-
-  const resetProjectForm = () => {
-    const name = document.querySelector('#projectInput');
-    name.value = '';
-  };
-
-  projectSubBtn.addEventListener('click', () => {
-    projectsArr.push(projectFormInput());
-    generateProjectCard(projectFormInput());
-    console.table(projectsArr);
-    resetProjectForm();
-    const addProjectButton = document.querySelector('.addProjectButton');
-    addProjectButton.style.transform = 'scale(1)';
-    saveToStorage();
-  });
-};
 
 const genererateCloseButton = () => {
   const modal = document.querySelector('.modal');

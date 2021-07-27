@@ -8,15 +8,16 @@ function saveToStorage() {
 
 function loadFromStorage() {
   const loadProjects = JSON.parse(localStorage.getItem('projectsArr'));
+
   setProjectsArr(loadProjects);
-  if (projectsArr === null) projectsArr = [];
+  if (projectsArr === null) setProjectsArr([]);
   console.table(projectsArr);
 }
 
 function clearStorage() {
   localStorage.clear();
-  projectsArr = [];
-  resetDisplay();
+  setProjectsArr([]);
+ // resetDisplay();
 }
 
 export { saveToStorage, loadFromStorage, clearStorage };

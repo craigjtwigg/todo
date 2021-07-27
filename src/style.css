@@ -368,7 +368,11 @@ h1 {
 
 .addProjectButton {
   grid-area: button;
-  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  height: 150px;
+  width: max-content;
   display: block;
   background: rgb(65, 33, 203);
   color: blanchedalmond;
@@ -382,4 +386,17 @@ h1 {
 .addProjectButton:hover {
   cursor: pointer;
   background: rgb(23, 36, 218);
+}
+
+.addSVG {
+  min-height: 80%;
+}
+
+.newProjectHeader {
+  text-align: center;
+  margin: 1.5rem;
+}
+
+.illustration {
+  height: 200px;
 }

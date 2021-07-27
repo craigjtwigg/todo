@@ -1,7 +1,8 @@
 import { activeProject } from ".";
-import { generateProjectForm, refreshProjects } from "./createProject";
+import { generateDemoProject, generateProjectForm, refreshProjects } from "./createProject";
 import { saveToStorage, loadFromStorage, clearStorage } from "./storage";
 import { activeToDo, activeToDoID } from "./createTodo";
+import Add from './add.svg'
 
 
 // dom elements
@@ -88,10 +89,13 @@ const renderProjectsContainer = () => {
 //sidebar add new project
 
 const renderAddProjectBtn = () => {
-  domElements.addProjectButton.textContent = 'ADD PROJECT';
+  const add = new Image()
+  add.src = Add
+  add.classList.add('addSVG')
+  domElements.addProjectButton.appendChild(add)
   domElements.addProjectButton.classList.add('addProjectButton');
   domElements.sideBarDiv.appendChild(domElements.addProjectButton);
-  domElements.addProjectButton.style.transform = 'scale(0)';
+  domElements.addProjectButton.style.transform = 'scale(1)';
 };
 
 //sidebar rendering
@@ -101,12 +105,12 @@ const renderSideBar = () => {
   renderSideBarHeader();
   renderProjectsContainer();
   renderAddProjectBtn();
-
+  refreshProjects();
   
   domElements.addProjectButton.addEventListener('click', () => {
     generateProjectForm();
   });
-  refreshProjects();
+  
 }
 
 //main content container
@@ -158,12 +162,14 @@ export const renderModal = () => {
 //full ui render
 
 const renderUI = (() => {
+  //clearStorage()
   loadFromStorage()
   renderMasterContainer();
   renderHeader();
   renderLogo();
   renderSideBar()
   renderContentContainer()
+  generateDemoProject()
   generateProjectForm()
   renderModal()
   //refreshProjects()

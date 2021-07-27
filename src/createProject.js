@@ -69,7 +69,10 @@ const submitProjectEvent = () => {
     resetProjectForm();
   });
 };
-
+const illustration = new Image()
+  illustration.src = Illustration
+  illustration.classList.add('illustration')
+  
 export const generateProjectForm = () => {
   domElements.mainContentContainer.textContent = '';
   const newProjectHeader = document.createElement('h2')
@@ -93,9 +96,7 @@ export const generateProjectForm = () => {
   domElements.projectSubBtn.setAttribute('id', 'projectSubBtn');
   domElements.projectFormDiv.appendChild(domElements.projectInput);
   domElements.projectFormDiv.appendChild(domElements.projectSubBtn);
-  const illustration = new Image()
-  illustration.src = Illustration
-  illustration.classList.add('illustration')
+  
   domElements.projectFormDiv.appendChild(illustration)
 
 

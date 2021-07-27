@@ -4,6 +4,7 @@ import { generateToDoForm, refreshToDos } from './createTodo';
 import { saveToStorage } from './storage';
 import Project from './project';
 import Illustration from './illustration.svg'
+import { renderRemoveProjectBtn } from './deleteProject';
 
 
 export const generateDemoProject = () => {
@@ -45,6 +46,7 @@ export const generateProjectCard = (project) => {
     domElements.mainContentContainer.appendChild(projectContent());
     generateToDoForm();
     refreshToDos();
+    renderRemoveProjectBtn()
   });
 }
 };
@@ -69,10 +71,11 @@ const submitProjectEvent = () => {
     resetProjectForm();
   });
 };
+
 const illustration = new Image()
   illustration.src = Illustration
   illustration.classList.add('illustration')
-  
+
 export const generateProjectForm = () => {
   domElements.mainContentContainer.textContent = '';
   const newProjectHeader = document.createElement('h2')

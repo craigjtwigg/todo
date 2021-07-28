@@ -81,6 +81,7 @@ h1 {
 }
 
 .projectDiv {
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -456,4 +457,42 @@ h1 {
 
 .removeProjectBtn:hover {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {
+  .illustration {
+    height: 100px;
+  }
+
+  .addProjectButton {
+    width: 80px;
+    height: 80px;
+  }
+
+  .addSVG {
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+    height: 60px;
+  }
+
+  .projectsHeader {
+    font-size: 1rem;
+  }
+
+  .toDoCard, .done{
+    font-size: 1.2rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .doneToDo, .editToDo, .deleteToDo {
+    transform: scale(0.7);
+    margin: 0.2rem;
+  }
+  
+  .projectForm {
+    font-size: 0.5rem;
+  }
 }

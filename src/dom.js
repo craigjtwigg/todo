@@ -1,8 +1,8 @@
 import { activeProject } from ".";
 import { generateDemoProject, generateProjectForm, refreshProjects } from "./createProject";
 import { saveToStorage, loadFromStorage, clearStorage } from "./storage";
-import { activeToDo, activeToDoID } from "./createTodo";
 import Add from './add.svg'
+import Clear from './clear.svg'
 
 
 // dom elements
@@ -15,6 +15,7 @@ export const domElements = (() => {
   const projectsHeader = document.createElement('div');
   const projects = document.createElement('div');
   const addProjectButton = document.createElement('button');
+  const clearProjectsButton = document.createElement('button')
   const mainContentContainer = document.createElement('div');
   const projectFormDiv = document.createElement('div');
   const projectInput = document.createElement('input');
@@ -30,6 +31,7 @@ export const domElements = (() => {
     projectsHeader,
     projects,
     addProjectButton,
+    clearProjectsButton,
     mainContentContainer,
     projectFormDiv,
     projectInput,
@@ -98,6 +100,17 @@ const renderAddProjectBtn = () => {
   domElements.addProjectButton.style.transform = 'scale(1)';
 };
 
+//sidebar clear projects
+const renderClearProjectBtn = () => {
+  const clear = new Image()
+  clear.src = Clear
+  clear.classList.add('clearSVG')
+  domElements.clearProjectsButton.appendChild(clear)
+  domElements.clearProjectsButton.classList.add('clearProjectsButton');
+  domElements.sideBarDiv.appendChild(domElements.clearProjectsButton);
+  domElements.clearProjectsButton.style.transform = 'scale(1)';
+};
+
 //sidebar rendering
 
 const renderSideBar = () => {
@@ -105,11 +118,17 @@ const renderSideBar = () => {
   renderSideBarHeader();
   renderProjectsContainer();
   renderAddProjectBtn();
+  renderClearProjectBtn()
   refreshProjects();
   
   domElements.addProjectButton.addEventListener('click', () => {
     generateProjectForm();
   });
+
+  domElements.clearProjectsButton.addEventListener('click', () => {
+    clearStorage()
+    refreshProjects()
+  })
   
 }
 

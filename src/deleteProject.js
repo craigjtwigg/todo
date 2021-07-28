@@ -1,7 +1,7 @@
 import Remove from './remove.svg'
 import { activeProject, setActiveProject, projectsArr, setProjectsArr } from '.'
 import { saveToStorage } from './storage'
-import { refreshProjects } from './createProject'
+import { generateProjectForm, refreshProjects } from './createProject'
 import { domElements, projectContent } from './dom'
 import { generateToDoForm, refreshToDos } from './createTodo'
 
@@ -10,12 +10,15 @@ export const generateButton = () => {
     removeButton.classList.add = ('removeProject')
     const removeIcon = new Image()
     removeIcon.src = Remove
+    removeIcon.classList.add('removeProjectBtn')
     removeButton.appendChild(removeIcon)
     domElements.mainContentContainer.appendChild(removeButton)
     const activeProjectIndex = projectsArr.indexOf(activeProject)
     removeButton.addEventListener('click', () => {
         projectsArr.splice(activeProjectIndex, 1)
         postRemoveReset()
+        saveToStorage()
+        domElements.mainContentContainer.appendChild(generateProjectForm());
     })
 } 
 
@@ -23,8 +26,6 @@ export const postRemoveReset = () => {
     const newActiveProject = projectsArr[0];
     setActiveProject(newActiveProject)
     domElements.mainContentContainer.appendChild(projectContent());
-    generateToDoForm();
-    refreshToDos();
     refreshProjects();
 }
 
